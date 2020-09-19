@@ -8,6 +8,7 @@
     - [FILE I/O](#file-io)
     - [Random Numbers](#random-numbers)
     - [Atomic library](#atomic-library)
+    - [Containers](#containers)
 - [License](#license)
 
 <!-- /TOC -->
@@ -81,6 +82,14 @@ For C++17 support, use gcc-8 `(g++ (Ubuntu 8.2.0-1ubuntu2~18.04) 8.2.0)`
 - [std::atomic_uint64_t with exchange](atomic/03-atomic.cc)
 - [std::atomic with POD](atomic/04-atomic.cc)
 - [std::atomic with shared ptr](atomic/05-atomic.cc)
+
+## Containers
+- [std::stack usage](containers/01-containers.cc)
+- [std::queue usage](containers/02-containers.cc)
+- [std::priority_queue usage](containers/03-containers.cc)
+- [std::map usage](containers/04-containers.cc)
+- [std::multimap usage](containers/05-containers.cc)
+- [std::unordered_map, std::unordered_multimap usage](containers/06-containers.cc)
 
 # License
 [MIT](LICENSE)
