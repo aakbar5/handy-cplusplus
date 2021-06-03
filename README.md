@@ -9,6 +9,7 @@
     - [Random Numbers](#random-numbers)
     - [Atomic library](#atomic-library)
     - [Containers](#containers)
+    - [Fold expression](#fold-expression)
 - [License](#license)
 
 <!-- /TOC -->
@@ -90,6 +91,11 @@ For C++17 support, use gcc-8 `(g++ (Ubuntu 8.2.0-1ubuntu2~18.04) 8.2.0)`
 - [std::map usage](containers/04-containers.cc)
 - [std::multimap usage](containers/05-containers.cc)
 - [std::unordered_map, std::unordered_multimap usage](containers/06-containers.cc)
+
+## Fold expression
+- [Simple fold expression](fold/01-fold.cc)
+- [Fold expression with associativity](fold/02-fold.cc)
+- [Misc usage](fold/03-fold.cc)
 
 # License
 [MIT](LICENSE)
