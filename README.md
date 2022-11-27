@@ -2,6 +2,7 @@
 
 - [CXX](#cxx)
     - [General](#general)
+    - [Chrono](#chrono)
     - [Thread](#thread)
     - [Smart Pointer](#smart-pointer)
     - [Regular Expression](#regular-expression)
@@ -26,15 +27,28 @@ For C++17 support, use gcc-8 `(g++ (Ubuntu 8.2.0-1ubuntu2~18.04) 8.2.0)`
 ## General
 - [nullptr](general/nullptr.cc)
 - [Data type overflow](general/type_overflow.cc)
-- [Elapsed time](general/elapsed_time.cc)
-- [Timer with callback](general/cc_timer.cc)
 - [Erase/Remove idiom](general/erase_remove.cc)
 - [Show type of an object](general/print_type.cc)
 - [Iterator implementation -- simple collection class](general/iterator_1.cc)
 - [Iterator implementation -- begin and end funcs](general/iterator_2.cc)
 - [Iterator implementation -- read iterator](general/iterator_3.cc)
-- [Print date & time](general/print_time.cc)
 - [String utilities](general/string_utils.cc)
+- [variant](general/variant.cc)
+- [Bitset usage](general/bitset-01.cc)
+- [std::bitset + bit algo usage](general/bitset-02.cc)
+- [Structure bindings](general/structure_bindings.cc)
+- [Tuple usage](general/tuple-01.cc)
+
+## Chrono
+- [Calculate elapsed time](chrono/01-chrono.cc)
+- [Calculate elapsed time using a generic func](chrono/02-chrono.cc)
+- [Print date & time](chrono/03-chrono.cc)
+- [Timer functionality with callback](chrono/04-chrono.cc)
+- [Manipulate different clocks](chrono/05-chrono.cc)
+- [Number of days between two dates](chrono/05-chrono.cc)
+- [Determine the day of the week from a date](chrono/06-chrono.cc)
+- [Day of the week](chrono/07-chrono.cc)
+- [Calendar of a month](chrono/08-chrono.cc)
 
 ## Thread
 - [Create a thread simple/pass parameter/lambda](thread/01-thread.cc)

@@ -1,17 +1,17 @@
 //
 // Program
 //  A class with simulates the functionality timer. On expiration
-//  of time, timer can call an callback function too.
+//  of time, timer can execute a callback function too.
 //  Timer can configured in different ways:
 //  - It can be asked to run for specific number of times.
 //  - or it can be asked to run for infinite number of times.
-//      - Use stop API to stop this timer.
+//      - Use stop function to stop this timer.
 //
 // Compile
-//  g++ -Wall -Wextra -pedantic -std=c++17 -pthread -o cc_timer cc_timer.cc
+//  g++ -Wall -Wextra -pedantic -std=c++17 -pthread -o 04-chrono 04-chrono.cc
 //
 // Execution
-//  ./cc_timer
+//  ./04-chrono
 //
 
 #include <iostream>
@@ -44,13 +44,13 @@ private:
   }
 
 public:
-  Timer() = delete; // standard ctor
-  Timer(const Timer&) = delete; // Copy ctor
-  Timer& operator=(const Timer&) = delete; // Assignment ctor
-  Timer(Timer &&) = delete; // Move ctor
+  Timer() = delete;
+  Timer(const Timer&) = delete;
+  Timer& operator=(const Timer&) = delete;
+  Timer(Timer &&) = delete;
 
   explicit Timer(intmax_t time_out_ms, intmax_t shot_count=1,
-          std::function<void(void)> callback=nullptr):
+                 std::function<void(void)> callback=nullptr):
     time_out_ms_(time_out_ms),
     shot_count_(shot_count),
     callback_(callback),

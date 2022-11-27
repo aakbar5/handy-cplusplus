@@ -1,9 +1,6 @@
 //
 // Program
-//  This program simply creates a thread and prints its ID.
-//      - Create a thread
-//      - Create a thread which accepts a parameter
-//      - Create a thread whose callback is implemented by lambda
+//  Calculate elapsed time.
 //
 // Compile
 //  g++ -Wall -Wextra -pedantic -std=c++17 -o 01-chrono 01-chrono.cc
@@ -13,57 +10,49 @@
 //
 
 #include <iostream>
-#include <chrono>
 #include <iomanip>
+#include <chrono>
+#include <thread>
 
-template<typename clock>
-void fun(std::string msg) {
-  auto now = clock::now();
-  auto int_ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
-  std::cout << msg << int_ms << std::endl;
-}
+using namespace std::chrono_literals;
 
 //
 // Entry function
 //
 int main() {
-  // system wide real time wall clock
-  // C-style time_t is available in it
-  // Since C++20, Unix Time
+  std::cout << "--- Calculate elapsed time ---" << '\n';
+
+  std::cout << "Sleep for a while..." << '\n';
+  auto start = std::chrono::high_resolution_clock::now();
   {
-    // const std::chrono::time_point<std::chrono::system_clock>
-    auto now = std::chrono::system_clock::now();
-    const std::time_t time = std::chrono::system_clock::to_time_t(now);
-    std::cout << "system_clock: " << std::put_time(std::localtime(&time), "%F %T") << '\n';
+    std::this_thread::sleep_for(5s);
+  }
+  auto end = std::chrono::high_resolution_clock::now();
+
+  /* Method # 1 use duration_cast to calcaulate elapsed time */
+  {
+    auto ns = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+    auto us = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    auto sc = std::chrono::duration_cast<std::chrono::seconds>(end - start);
+
+    std::cout << " Elapsed time (duration_cast - ns) # " << ns.count() << " nsec" << '\n';
+    std::cout << " Elapsed time (duration_cast - us) # " << us.count() << " usec" << '\n';
+    std::cout << " Elapsed time (duration_cast - ms) # " << ms.count() << " msec" << '\n';
+    std::cout << " Elapsed time (duration_cast - sc) # " << sc.count() << " sec" << '\n';
   }
 
-  // Increase with time
-  // Can be mapped to system_clock of steady_clock so portablility can be problemetic
+  /* Method # 2 use duration and ratio to calculate elapsed time */
   {
-    // const std::chrono::time_point<std::chrono::high_resolution_clock>
-    auto now = std::chrono::high_resolution_clock::now();
-    const std::time_t time = std::chrono::system_clock::to_time_t(now);
-    std::cout << "high_resolution_clock: " << std::put_time(std::localtime(&time), "%F %T") << '\n';
-  }
+    std::chrono::duration<double, std::nano> ns = end - start;
+    std::chrono::duration<double, std::micro> us = end - start;
+    std::chrono::duration<double, std::milli> ms = end - start;
+    std::chrono::duration<double, std::deci> sc = end - start;
 
-  // Increase with time
-  // Good for interval measurements
-  {
-    //  std::chrono::steady_clock::time_point
-    // std::chrono::time_point<std::chrono::steady_clock>
-    // auto now = std::chrono::steady_clock::now();
-    // return system_clock::to_time_t(system_clock::now() + (t - steady_clock::now()));
-    // const std::time_t time = std::chrono::system_clock::to_time_t(now);
-    // std::cout << "steady_clock: " << std::put_time(std::localtime(&time), "%F %T") << '\n';
-  }
-
-  // utc_clock
-  {
-    fun<std::chrono::system_clock>("system_clock: ");
-    fun<std::chrono::high_resolution_clock>("high_resolution_clock: ");
-    // fun<std::chrono::utc_clock>("utc_clock: ");
-    // fun<std::chrono::gps_clock>("gps_clock: ");
-    // fun<std::chrono::tai_clock>("tai_clock: ");
+    std::cout << " Elapsed time (duration - ns)      # " << std::setprecision(5) << ns.count() << " nsec" << '\n';
+    std::cout << " Elapsed time (duration - us)      # " << std::setprecision(5) << us.count() << " usec" << '\n';
+    std::cout << " Elapsed time (duration - ms)      # " << std::setprecision(5) << ms.count() << " msec" << '\n';
+    std::cout << " Elapsed time (duration - sc)      # " << std::setprecision(5) << sc.count() << " sec" << '\n';
   }
 
   return 0;

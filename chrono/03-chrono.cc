@@ -3,10 +3,10 @@
 //  Print date & time.
 //
 // Compile
-//  g++ -Wall -Wextra -pedantic -std=c++17 -pthread -o print_time print_time.cc
+//  g++ -Wall -Wextra -pedantic -std=c++17 -pthread -o 03-chrono 03-chrono.cc
 //
 // Execution
-//  ./print_time
+//  ./03-chrono
 //
 
 #include <iostream>
