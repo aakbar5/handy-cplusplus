@@ -38,6 +38,7 @@ For C++17 support, use gcc-8 `(g++ (Ubuntu 8.2.0-1ubuntu2~18.04) 8.2.0)`
 - [std::bitset + bit algo usage](general/bitset-02.cc)
 - [Structure bindings](general/structure_bindings.cc)
 - [Tuple usage](general/tuple-01.cc)
+- [<algorithm>](general/algorithm.cc)
 
 ## Chrono
 - [Calculate elapsed time](chrono/01-chrono.cc)
