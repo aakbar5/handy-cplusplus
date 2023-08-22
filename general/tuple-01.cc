@@ -110,5 +110,31 @@ int main() {
     b.show();
   }
 
+  std::cout << "--- std::apply to calculate sum of tuple elements\n";
+  {
+    std::tuple <int, float> t1 (10, 10.5f);
+    auto add1 = [](int a, float b) {
+      return a+b;
+    };
+    std::cout << "std::apply (2 params): " << std::apply(add1, t1) << '\n';
+
+    std::tuple <int, int, float> t2 (10, 2, 10.5f);
+    auto add2 = [](int a, int b, float c) {
+      return a+b+c;
+    };
+    std::cout << "std::apply (3 params): " << std::apply(add2, t2) << '\n';
+  }
+
+  std::cout << "--- Iterate tuple elements\n";
+  {
+    std::tuple <int, float> t1 (10, 10.5f);
+    auto size = std::tuple_size<decltype(t1)>::value;
+    std::cout << "Size: " << size << std::endl;
+
+    using telement = std::tuple_element<0, decltype(t1)>::type;
+    telement a = 100.0f; // It won't be float as first element is of type int
+    std::cout << "value: " << a << '\n';
+  }
+
   return 0;
 }
