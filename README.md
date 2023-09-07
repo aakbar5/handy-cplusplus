@@ -115,6 +115,8 @@ For C++17 support, use gcc-8 `(g++ (Ubuntu 8.2.0-1ubuntu2~18.04) 8.2.0)`
 - [std::multimap usage](containers/05-containers.cc)
 - [std::unordered_map, std::unordered_multimap usage](containers/06-containers.cc)
 - [std::unordered_map with enum class](containers/07-containers.cc)
+- [std::unordered_map with custom hash](containers/08-containers.cc)
+- [Find a pair in std::vector](containers/09-containers.cc)
 
 ## Fold expression
 - [Simple fold expression](fold/01-fold.cc)
