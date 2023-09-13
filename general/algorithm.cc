@@ -1,6 +1,16 @@
 //
 // Program
 //  <algorithm> usage.
+//    - std::transform
+//    - std::count
+//    - std::count_if
+//    - std::generate
+//    - std::for_each
+//    - std::for_each_n
+//    - std::fill_n
+//    - std::copy
+//    - std::copy_if
+//    - std::copy_n
 //
 // Compile
 //  g++ -Wall -Wextra -pedantic -std=c++17 -o algorithm algorithm.cc
@@ -218,6 +228,55 @@ int main() {
       std::fill_n(std::back_inserter(vec), 10, -1);
       std::cout << "After: " << vec << '\n';
     }
+  }
+
+  std::cout << "--- std::copy ---" << '\n';
+  {
+    std::vector<int> input { 2, 3, 4 };
+    std::vector<int> output {};
+
+    std::copy(input.begin(), input.end(),
+      std::back_inserter(output)
+    );
+
+    // Both input/output containers should be same
+    std::cout << "Input:  " << input << std::endl;
+    std::cout << "Output: " << output << std::endl;
+    assert(input.size() == output.size());
+  }
+
+  std::cout << "--- std::copy_if ---" << '\n';
+  {
+    std::vector<int> input { 2, 3, 4 };
+    std::vector<int> output {};
+
+    auto isItOdd = [](int num) {
+        return ((num & 0x1) == 0x1);
+    };
+    std::copy_if(input.begin(), input.end(),
+      std::back_inserter(output),
+      isItOdd
+    );
+
+    // Output should only have odd numbers
+    std::cout << "Input:  " << input << std::endl;
+    std::cout << "Output: " << output << std::endl;
+    assert(1 == output.size());
+  }
+
+  std::cout << "--- std::copy_n ---" << '\n';
+  {
+    std::vector<int> input { 2, 3, 4 };
+    std::vector<int> output {};
+
+    std::copy_n(input.begin(), input.size(),
+      std::back_inserter(output)
+    );
+
+    // Both input/output containers should be same
+    std::cout << "Input:  " << input << std::endl;
+    std::cout << "Output: " << output << std::endl;
+    assert(input.size() == output.size());
   }
 
   return 0;
