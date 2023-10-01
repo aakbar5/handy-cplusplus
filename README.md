@@ -39,6 +39,7 @@ For C++17 support, use gcc-8 `(g++ (Ubuntu 8.2.0-1ubuntu2~18.04) 8.2.0)`
 - [Structure bindings](general/structure_bindings.cc)
 - [Tuple usage](general/tuple-01.cc)
 - [algorithm](general/algorithm.cc)
+- [algorithm @ `copy`](general/algorithm_copy.cc)
 - [Type traits usage - 01](general/type_traits-01.cc)
 - [Type traits usage - 02](general/type_traits-02.cc)
 - [Type traits usage - 03](general/type_traits-03.cc)

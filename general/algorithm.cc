@@ -1,16 +1,17 @@
 //
 // Program
 //  <algorithm> usage.
-//    - std::transform
+//    - std::transform (Extract odd)
+//    - std::transform (Extract values from map)
+//    - std::transform (+ two vectors)
+//    - std::transform (Change case and copy to output)
+//    - std::transform (Change case inplace)
+//    - std::transform (vector of structure <> array of structure)
 //    - std::count
-//    - std::count_if
 //    - std::generate
 //    - std::for_each
 //    - std::for_each_n
 //    - std::fill_n
-//    - std::copy
-//    - std::copy_if
-//    - std::copy_n
 //
 // Compile
 //  g++ -Wall -Wextra -pedantic -std=c++17 -o algorithm algorithm.cc
@@ -25,7 +26,7 @@
 #include <cassert>
 
 // Util function to print vector
-static std::ostream& operator<< (std::ostream& out, const std::vector<int> vec) {
+static std::ostream& operator<< (std::ostream& out, const std::vector<int>& vec) {
 
   out << "(size: " << vec.size() << ") ";
   for (const auto &num: vec) {
@@ -44,7 +45,7 @@ int main() {
     // and stores results to the 2nd container
 
     // Make vector of values having odd numbers
-    std::cout << "--- std::transform (extract odd) ---" << '\n';
+    std::cout << "--- std::transform (Extract odd) ---" << '\n';
     {
       std::vector<int> input {1, 2, 3, 4, 5, 6};
       std::vector<int> odd {};
@@ -61,7 +62,7 @@ int main() {
     }
 
     // Extract values from the map
-    std::cout << "--- std::transform (extract values from map) ---" << '\n';
+    std::cout << "--- std::transform (Extract values from map) ---" << '\n';
     {
       std::map<std::string, int> input {
         {"Test1", 100}, {"Test2", 200},
@@ -99,8 +100,7 @@ int main() {
       std::cout << "Sum:    " << total << '\n';
     }
 
-    // Change case of the input string
-    std::cout << "--- std::transform (Change case) ---" << '\n';
+    std::cout << "--- std::transform (Change case and copy to output) ---" << '\n';
     {
       std::string input {"HELLO world"};
       std::string output {};
@@ -118,7 +118,6 @@ int main() {
       std::cout << "Output: " << output << '\n';
     }
 
-    // Change case of the input string (inplace)
     std::cout << "--- std::transform (Change case inplace) ---" << '\n';
     {
       std::string input {"HELLO world"};
@@ -133,6 +132,48 @@ int main() {
       std::transform(std::begin(input), std::end(input),
                      std::begin(input), fun);
       std::cout << "Output: " << input << '\n';
+    }
+
+    std::cout << "--- std::transform (vector of structure <> array of structure) ---" << '\n';
+    {
+      constexpr int size = 6;
+
+      struct pack {
+        int ival;
+        float fval;
+      };
+
+      std::vector<pack> pack_vec(size);
+      for (int i = 0; i < size; ++i) {
+        pack_vec[i].ival = i + 0;
+        pack_vec[i].fval = i + 0.1f;
+      }
+
+      std::cout << " [Input]\n";
+      for (int i = 0; i < size; ++i) {
+        std::cout << '(' << pack_vec[i].ival << "," <<  pack_vec[i].fval << ')' << ' ';
+      }
+      std::cout << '\n';
+
+      pack pack_arr[size] = {0};
+      for (int i = 0; i < size; ++i) {
+        std::cout << '(' << pack_arr[i].ival << "," <<  pack_arr[i].fval << ')' << ' ';
+      }
+      std::cout << '\n';
+
+      {
+        std::transform(std::begin(pack_vec), std::end(pack_vec),
+          pack_arr, [](const auto & elem) {
+            return elem;
+          }
+        );
+      }
+
+      std::cout << " [Output]\n";
+      for (int i = 0; i < size; ++i) {
+        std::cout << '(' << pack_arr[i].ival << "," <<  pack_arr[i].fval << ')' << ' ';
+      }
+      std::cout << '\n';
     }
   }
 
@@ -228,55 +269,6 @@ int main() {
       std::fill_n(std::back_inserter(vec), 10, -1);
       std::cout << "After: " << vec << '\n';
     }
-  }
-
-  std::cout << "--- std::copy ---" << '\n';
-  {
-    std::vector<int> input { 2, 3, 4 };
-    std::vector<int> output {};
-
-    std::copy(input.begin(), input.end(),
-      std::back_inserter(output)
-    );
-
-    // Both input/output containers should be same
-    std::cout << "Input:  " << input << std::endl;
-    std::cout << "Output: " << output << std::endl;
-    assert(input.size() == output.size());
-  }
-
-  std::cout << "--- std::copy_if ---" << '\n';
-  {
-    std::vector<int> input { 2, 3, 4 };
-    std::vector<int> output {};
-
-    auto isItOdd = [](int num) {
-        return ((num & 0x1) == 0x1);
-    };
-    std::copy_if(input.begin(), input.end(),
-      std::back_inserter(output),
-      isItOdd
-    );
-
-    // Output should only have odd numbers
-    std::cout << "Input:  " << input << std::endl;
-    std::cout << "Output: " << output << std::endl;
-    assert(1 == output.size());
-  }
-
-  std::cout << "--- std::copy_n ---" << '\n';
-  {
-    std::vector<int> input { 2, 3, 4 };
-    std::vector<int> output {};
-
-    std::copy_n(input.begin(), input.size(),
-      std::back_inserter(output)
-    );
-
-    // Both input/output containers should be same
-    std::cout << "Input:  " << input << std::endl;
-    std::cout << "Output: " << output << std::endl;
-    assert(input.size() == output.size());
   }
 
   return 0;
