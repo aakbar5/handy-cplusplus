@@ -118,6 +118,7 @@ For C++17 support, use gcc-8 `(g++ (Ubuntu 8.2.0-1ubuntu2~18.04) 8.2.0)`
 - [std::unordered_map with enum class](containers/07-containers.cc)
 - [std::unordered_map with custom hash](containers/08-containers.cc)
 - [Find a pair in std::vector](containers/09-containers.cc)
+- [std::unordered_map access by index](containers/10-containers.cc)
 
 ## Fold expression
 - [Simple fold expression](fold/01-fold.cc)
