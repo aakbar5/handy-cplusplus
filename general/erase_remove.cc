@@ -10,20 +10,19 @@
 //  ./erase_remove
 //
 
-#include <iostream>
-#include <vector>
 #include <algorithm>
+#include <iostream>
 #include <iterator>
 #include <vector>
 
 template <typename T>
-void show(const std::vector<T>& container) {
+static void show(const std::vector<T>& container) {
   std::copy(std::begin(container), std::end(container),
     std::ostream_iterator<T>(std::cout, " "));
   std::cout << '\n';
 }
 
-void test_remove() {
+static void test_remove() {
   std::vector<int> input {1, 2, 3, 4, 5};
 
   std::cout << "vanilla container    (" << input.size() << "): ";
@@ -33,7 +32,7 @@ void test_remove() {
   // size remains the same
   std::remove_if(std::begin(input), std::end(input),
     [](auto &num) {
-        return ((num & 1) == 0);
+      return ((num & 1) == 0);
     }
   );
 
@@ -41,7 +40,7 @@ void test_remove() {
   show<int>(input);
 }
 
-void test_erase() {
+static void test_erase() {
   std::vector<int> input {1, 2, 3, 4, 5};
 
   std::cout << "remove_if/erase container  (" << input.size() << "): ";
@@ -69,3 +68,12 @@ int main()
 
   return 0;
 }
+
+/*
+Test # remove_if:
+vanilla container    (5): 1 2 3 4 5
+remove_if container  (5): 1 3 5 4 5
+Test # remove_if + erase:
+remove_if/erase container  (5): 1 2 3 4 5
+remove_if/erase container  (3): 1 3 5
+*/
