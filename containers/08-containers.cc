@@ -60,13 +60,13 @@ int main() {
       }
     };
 
-    struct Hash {
+    struct KeyHash {
       std::size_t operator()(const Pixel& pix) const {
         return (size_t)pix.idx ^ static_cast<uint8_t>(pix.col);
       };
     };
 
-    std::unordered_set<Pixel, Hash> m {
+    std::unordered_set<Pixel, KeyHash> m {
       {1, Color::RED},
       {2, Color::GREEN},
       {3, Color::BLUE},
@@ -85,3 +85,15 @@ int main() {
 
   return 0;
 }
+
+// Output
+// unordered_set<std::string> ---
+// Show items of the std::unordered_set 2
+// entry2
+// entry1
+// unordered_set<struct> ---
+// Show items of the std::unordered_set 4
+// {3,Red}
+// {2,Green}
+// {3,Blue}
+// {1,Red}

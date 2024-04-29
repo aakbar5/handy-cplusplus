@@ -117,12 +117,14 @@ For C++17 support, use gcc-8 `(g++ (Ubuntu 8.2.0-1ubuntu2~18.04) 8.2.0)`
 - [std::queue usage](containers/02-containers.cc)
 - [std::priority_queue usage](containers/03-containers.cc)
 - [std::map usage](containers/04-containers.cc)
-- [std::multimap usage](containers/05-containers.cc)
+- [std::multimap & std::multiset usage](containers/05-containers.cc)
 - [std::unordered_map, std::unordered_multimap usage](containers/06-containers.cc)
 - [std::unordered_map with enum class](containers/07-containers.cc)
-- [std::unordered_map with custom hash](containers/08-containers.cc)
+- [std::unordered_map with custom hash or structure](containers/08-containers.cc)
 - [Find a pair in std::vector](containers/09-containers.cc)
 - [std::unordered_map access by index](containers/10-containers.cc)
+- [Container usage of reserve, size and capacity](containers/11-containers.cc)
+- [Remove an element from the container](containers/12-containers.cc)
 
 ## Fold expression
 - [Simple fold expression](fold/01-fold.cc)

@@ -21,7 +21,7 @@ using element = std::pair<uint32_t, float>;
 // Checks if the container contains given element
 bool contains(const std::vector<element>& vec, uint32_t key) {
   auto it = std::find_if(vec.begin(), vec.end(), [key](const element& elem) {
-      return (elem.first == key);
+    return (elem.first == key);
   });
 
   return (it != vec.end());
@@ -30,7 +30,7 @@ bool contains(const std::vector<element>& vec, uint32_t key) {
 // Checks if the container contains given element
 std::optional<element> find(const std::vector<element>& vec, uint32_t key) {
   auto it = std::find_if(vec.begin(), vec.end(), [key](const element& elem) {
-      return (elem.first == key);
+    return (elem.first == key);
   });
 
   if (it == vec.end()) {

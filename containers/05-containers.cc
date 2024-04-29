@@ -1,6 +1,10 @@
 //
 // Program
-//  Containers: std::multimap usage
+//  Containers: std::multimap & std::multiset usage
+//  - Simple multimap
+//  - multimap: Use lower_bound and upper_bound
+//  - multimap: Erase entries using lower_bound, upper_bound
+//  - multiset: std::multiset with c-structure
 //
 // Compile
 //  g++ -Wall -Wextra -pedantic -std=c++17 -o 05-containers 05-containers.cc
@@ -11,6 +15,7 @@
 
 #include <iostream>
 #include <map>
+#include <set>
 
 // Print map
 template <typename UserMap>
@@ -140,5 +145,75 @@ int main() {
     print_map(m);
   }
 
+  // Structure
+  std::cout << "std::set with structure ---" << '\n';
+  {
+    struct Object {
+      int id;
+      std::string name;
+      bool operator< (const Object& second) const {
+        return (id < second.id);
+      }
+    };
+
+    std::multiset<Object> set;
+    set.insert({1, "test1"});
+    set.insert({2, "test2"});
+    set.insert({3, "test3"});
+
+    for (const auto& obj: set) {
+      std::cout << "{" << obj.id << ", " << obj.name << "}\n";
+    }
+  }
+
   return 0;
 }
+
+// Output
+// --- std::multimap ---
+// Size: 3
+// Is empty: false
+// Max size: 128102389400760775
+// Key # 3 is having count: 1
+// Show items of the map
+// 1 : entry1
+// 2 : entry2
+// 3 : entry3
+// Key # 3 is having count: 2
+// 1 : entry1
+// 2 : entry2
+// 3 : entry3
+// 3 : entry3_2
+// Lower bound ---
+// Size: 8
+// 0 : 1, entry1
+// 1 : 2, entry2
+// 2 : 3, entry3
+// 3 : 4, entry4
+// 4 : 5, entry5
+// Upper bound ---
+// Size: 8
+// 0 : 7, entry7
+// 1 : 8, entry8
+// 2 : 9, entry9
+// Erase ---
+// Size before delete: 8
+// 1 : entry1
+// 2 : entry2
+// 3 : entry3
+// 4 : entry4
+// 5 : entry5
+// 7 : entry7
+// 8 : entry8
+// 9 : entry9
+// Size after delete: 6
+// 1 : entry1
+// 2 : entry2
+// 3 : entry3
+// 4 : entry4
+// 5 : entry5
+// 9 : entry9
+// std::set with structure ---
+// {1, test1}
+// {2, test2}
+// {3, test3}

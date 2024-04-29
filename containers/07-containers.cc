@@ -77,3 +77,19 @@ int main() {
 
   return 0;
 }
+
+// Output
+// std::unordered_map with enum_class ---
+// Show items of the std::unordered_map 5
+// 4 : target5
+// 3 : target4
+// 2 : target3
+// 1 : target2
+// 0 : target1
+// std::unordered_map with enum_class (custom hash function) ---
+// Show items of the std::unordered_map 5
+// 4 : target5
+// 3 : target4
+// 2 : target3
+// 1 : target2
+// 0 : target1
