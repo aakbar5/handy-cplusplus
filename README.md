@@ -11,6 +11,7 @@
     - [Atomic library](#atomic-library)
     - [Containers](#containers)
     - [Fold expression](#fold-expression)
+    - [Misc](#misc)
     - [Design pattern](#design-pattern)
         - [Behavioural](#behavioural)
         - [Creational](#creational)
@@ -130,6 +131,12 @@ For C++17 support, use gcc-8 `(g++ (Ubuntu 8.2.0-1ubuntu2~18.04) 8.2.0)`
 - [Simple fold expression](fold/01-fold.cc)
 - [Fold expression with associativity](fold/02-fold.cc)
 - [Misc usage](fold/03-fold.cc)
+
+## Misc
+- [Generate all possible combinations](misc/01-misc.cc)
+- [Map a value of one range to another range](misc/02-misc.cc)
+- [General lookup table compile time](misc/03-misc.cc)
+- [String tokenization](misc/04-misc.cc)
 
 ## Design pattern
 ### Behavioural
