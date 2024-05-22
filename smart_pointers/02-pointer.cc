@@ -1,6 +1,15 @@
 //
 // Program
-//  This program simply creates unique pointer.
+//  Usage of unique pointer in different use-cases..
+//    - Simple unique_pointer
+//    - Empty unique_pointer via std::make_unique
+//    - Empty unique_pointer
+//    - std::move with unique_ptr
+//    - Raw pointer access
+//    - unique_ptr with array
+//    - Custom deletor
+//    - unique_ptr in map
+//    - unique_ptr in class data member
 //
 // Compile
 //  g++ -std=c++17 -o 02-pointer 02-pointer.cc
@@ -11,6 +20,7 @@
 
 #include <iostream>
 #include <memory>
+#include <map>
 
 struct Test {
   std::string msg{"Test string"};
@@ -25,6 +35,10 @@ struct Test {
 
   void show() {
     std::cout << "Message # " << this->msg << '\n';
+  }
+
+  std::string get() {
+    return this->msg;
   }
 
   ~Test() {
@@ -150,5 +164,102 @@ int main() {
     // dtor should be called
   }
 
+  std::cout << "--- unique_ptr in map ---" << '\n';
+  {
+    std::map<std::string, std::unique_ptr<Test>> map;
+
+    // unique ptr using make_unique
+    map["test1"] = std::make_unique<Test>("test1");
+
+    // Entry into map using insert
+    map.insert(std::make_pair("test2", std::make_unique<Test>("test2")));
+
+    // Entry of an old ptr
+    auto ptr = std::make_unique<Test>("test3");
+    map["test3"] = std::move(ptr);
+
+    for (const auto& m: map) {
+      std::cout << m.second->get() << '\n';
+    }
+  }
+
+  std::cout << "--- unique_ptr in class ---" << '\n';
+  {
+    struct Object {
+      std::unique_ptr<Test> ptr;
+      Object(): ptr(std::make_unique<Test>()) { std::cout << "Object()\n"; }
+      void call() { ptr->show(); }
+      ~Object() { std::cout << "~Object()\n"; }
+    };
+
+    Object obj {};
+    obj.call();
+  }
+
   return 0;
 }
+
+// Output
+// --- std::unique_ptr ---
+// --- plain pointer ---
+// Test(default)
+// Message # Test string
+// ~Test
+// --- simple unique_pointer ---
+// Test(default)
+// Message # Test string
+// ~Test
+// --- empty unique_pointer via std::make_unique ---
+// Test(default)
+// Message # Test string
+// ~Test
+// --- empty unique_pointer ---
+// It is empty
+// --- std::move with unique_ptr ---
+// Test(default)
+// ~Test
+// --- raw pointer access ---
+// Test(default)
+// Message # Test string
+// Message # Test string
+// ~Test
+// --- unique_ptr with array ---
+// Test(default)
+// Test(default)
+// Test(default)
+// Message # Test string
+// Message # Test string
+// Message # Test string
+// ~Test
+// ~Test
+// ~Test
+// Test(param)
+// Test(param)
+// Test(param)
+// Message # Obj1
+// Message # Obj2
+// Message # Obj3
+// ~Test
+// ~Test
+// ~Test
+// --- custom deletor ---
+// Test(default)
+// Message # Test string
+// custom delete func is called
+// ~Test
+// --- unique_ptr in map ---
+// Test(param)
+// Test(param)
+// Test(param)
+// test1
+// test2
+// test3
+// ~Test
+// ~Test
+// ~Test
+// --- unique_ptr in class ---
+// Test(default)
+// Object()
+// Message # Test string
+// ~Object()
+// ~Test
